@@ -516,6 +516,17 @@ Public Class frmPenEx
 #Region "Win Message"
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
         Select Case m.Msg
+            Case WM_DI_CHANGE_STATION
+                MsgBox("Sensor position changed")
+
+            Case WM_DISCONNECTPEN
+                MsgBox("Bluetooth Disconnected")
+            Case WM_DISCONNECTUSB
+                MsgBox("USB Disconnected")
+            Case WM_DI_NEWPAGE
+                MsgBox("press button of sensor(New Page)")
+            Case WM_DI_DUPLICATE
+                MsgBox("long press button of sensor(Duplicate Page)")
             Case WM_RETURNMESSAGE
                 If bPenConnect AndAlso bPenRunning Then
                     PacketCnt += 1
@@ -577,7 +588,7 @@ Public Class frmPenEx
                                 lbMakerState.Text = "Big eraser"
                         End Select
                     End If
-                    
+
 
                     If m_bDraw Then
                         Try
