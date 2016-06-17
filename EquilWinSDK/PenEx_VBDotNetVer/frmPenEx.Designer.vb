@@ -32,6 +32,15 @@ Partial Class frmPenEx
         Me.btnDrawing = New System.Windows.Forms.Button()
         Me.lbLog = New System.Windows.Forms.ListBox()
         Me.picMain = New System.Windows.Forms.PictureBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
+        Me.lbAliveSec = New System.Windows.Forms.Label()
+        Me.lbTemperature = New System.Windows.Forms.Label()
+        Me.lbPressure = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -46,26 +55,18 @@ Partial Class frmPenEx
         Me.lbModelCode = New System.Windows.Forms.Label()
         Me.lbHWVer = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.TrackBar1 = New System.Windows.Forms.TrackBar()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lbPacketCountClear = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.lbTemperature = New System.Windows.Forms.Label()
         Me.lbPacketCount = New System.Windows.Forms.Label()
         Me.lbConvY = New System.Windows.Forms.Label()
-        Me.lbPressure = New System.Windows.Forms.Label()
         Me.lbRawY = New System.Windows.Forms.Label()
         Me.lbStatus = New System.Windows.Forms.Label()
         Me.lbRawX = New System.Windows.Forms.Label()
         Me.lbConvX = New System.Windows.Forms.Label()
-        Me.lbAliveSec = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -74,6 +75,9 @@ Partial Class frmPenEx
         Me.Label27 = New System.Windows.Forms.Label()
         Me.lbBatteryStation = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnAudio = New System.Windows.Forms.Button()
+        Me.txtAudioVolume = New System.Windows.Forms.TextBox()
+        Me.txtAudioMode = New System.Windows.Forms.TextBox()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.lbConnectionType = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -84,10 +88,7 @@ Partial Class frmPenEx
         Me.lbStationPosition = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.lbMakerState = New System.Windows.Forms.Label()
-        Me.txtAudioMode = New System.Windows.Forms.TextBox()
-        Me.txtAudioVolume = New System.Windows.Forms.TextBox()
-        Me.btnAudio = New System.Windows.Forms.Button()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -95,12 +96,12 @@ Partial Class frmPenEx
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
         CType(Me.picMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox5.SuspendLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -122,7 +123,7 @@ Partial Class frmPenEx
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox2)
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(711, 804)
+        Me.SplitContainer1.Size = New System.Drawing.Size(747, 804)
         Me.SplitContainer1.SplitterDistance = 300
         Me.SplitContainer1.TabIndex = 1
         '
@@ -136,6 +137,7 @@ Partial Class frmPenEx
         '
         'SplitContainer2.Panel1
         '
+        Me.SplitContainer2.Panel1.Controls.Add(Me.Button1)
         Me.SplitContainer2.Panel1.Controls.Add(Me.cboPenStyle)
         Me.SplitContainer2.Panel1.Controls.Add(Me.btnConnectPen)
         Me.SplitContainer2.Panel1.Controls.Add(Me.btnClearLog)
@@ -147,7 +149,7 @@ Partial Class frmPenEx
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.lbLog)
         Me.SplitContainer2.Panel2.Controls.Add(Me.picMain)
-        Me.SplitContainer2.Size = New System.Drawing.Size(711, 300)
+        Me.SplitContainer2.Size = New System.Drawing.Size(747, 300)
         Me.SplitContainer2.SplitterDistance = 40
         Me.SplitContainer2.TabIndex = 0
         '
@@ -155,43 +157,43 @@ Partial Class frmPenEx
         '
         Me.cboPenStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPenStyle.FormattingEnabled = True
-        Me.cboPenStyle.Location = New System.Drawing.Point(455, 3)
+        Me.cboPenStyle.Location = New System.Drawing.Point(544, 11)
         Me.cboPenStyle.Name = "cboPenStyle"
-        Me.cboPenStyle.Size = New System.Drawing.Size(244, 20)
+        Me.cboPenStyle.Size = New System.Drawing.Size(200, 20)
         Me.cboPenStyle.TabIndex = 7
         '
         'btnConnectPen
         '
-        Me.btnConnectPen.Location = New System.Drawing.Point(182, 0)
+        Me.btnConnectPen.Location = New System.Drawing.Point(280, 0)
         Me.btnConnectPen.Name = "btnConnectPen"
-        Me.btnConnectPen.Size = New System.Drawing.Size(85, 40)
+        Me.btnConnectPen.Size = New System.Drawing.Size(82, 40)
         Me.btnConnectPen.TabIndex = 6
         Me.btnConnectPen.Text = "Connect"
         Me.btnConnectPen.UseVisualStyleBackColor = True
         '
         'btnClearLog
         '
-        Me.btnClearLog.Location = New System.Drawing.Point(364, 0)
+        Me.btnClearLog.Location = New System.Drawing.Point(456, 0)
         Me.btnClearLog.Name = "btnClearLog"
-        Me.btnClearLog.Size = New System.Drawing.Size(85, 40)
+        Me.btnClearLog.Size = New System.Drawing.Size(82, 40)
         Me.btnClearLog.TabIndex = 5
         Me.btnClearLog.Text = "Clear Log"
         Me.btnClearLog.UseVisualStyleBackColor = True
         '
         'btnReStartPen
         '
-        Me.btnReStartPen.Location = New System.Drawing.Point(273, 0)
+        Me.btnReStartPen.Location = New System.Drawing.Point(368, 0)
         Me.btnReStartPen.Name = "btnReStartPen"
-        Me.btnReStartPen.Size = New System.Drawing.Size(85, 40)
+        Me.btnReStartPen.Size = New System.Drawing.Size(82, 40)
         Me.btnReStartPen.TabIndex = 3
         Me.btnReStartPen.Text = "StopPen"
         Me.btnReStartPen.UseVisualStyleBackColor = True
         '
         'btnCalibration
         '
-        Me.btnCalibration.Location = New System.Drawing.Point(91, 0)
+        Me.btnCalibration.Location = New System.Drawing.Point(88, 0)
         Me.btnCalibration.Name = "btnCalibration"
-        Me.btnCalibration.Size = New System.Drawing.Size(85, 40)
+        Me.btnCalibration.Size = New System.Drawing.Size(82, 40)
         Me.btnCalibration.TabIndex = 1
         Me.btnCalibration.Text = "Calibration"
         Me.btnCalibration.UseVisualStyleBackColor = True
@@ -200,7 +202,7 @@ Partial Class frmPenEx
         '
         Me.btnDrawing.Location = New System.Drawing.Point(0, 0)
         Me.btnDrawing.Name = "btnDrawing"
-        Me.btnDrawing.Size = New System.Drawing.Size(85, 40)
+        Me.btnDrawing.Size = New System.Drawing.Size(82, 40)
         Me.btnDrawing.TabIndex = 0
         Me.btnDrawing.Text = "Drawing"
         Me.btnDrawing.UseVisualStyleBackColor = True
@@ -213,7 +215,7 @@ Partial Class frmPenEx
         Me.lbLog.ItemHeight = 16
         Me.lbLog.Location = New System.Drawing.Point(0, 0)
         Me.lbLog.Name = "lbLog"
-        Me.lbLog.Size = New System.Drawing.Size(711, 256)
+        Me.lbLog.Size = New System.Drawing.Size(747, 256)
         Me.lbLog.TabIndex = 1
         '
         'picMain
@@ -222,9 +224,105 @@ Partial Class frmPenEx
         Me.picMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picMain.Location = New System.Drawing.Point(0, 0)
         Me.picMain.Name = "picMain"
-        Me.picMain.Size = New System.Drawing.Size(711, 256)
+        Me.picMain.Size = New System.Drawing.Size(747, 256)
         Me.picMain.TabIndex = 0
         Me.picMain.TabStop = False
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Label11)
+        Me.GroupBox5.Controls.Add(Me.Label6)
+        Me.GroupBox5.Controls.Add(Me.Label12)
+        Me.GroupBox5.Controls.Add(Me.TrackBar1)
+        Me.GroupBox5.Controls.Add(Me.lbAliveSec)
+        Me.GroupBox5.Controls.Add(Me.lbTemperature)
+        Me.GroupBox5.Controls.Add(Me.lbPressure)
+        Me.GroupBox5.Controls.Add(Me.Label20)
+        Me.GroupBox5.Location = New System.Drawing.Point(14, 285)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(661, 90)
+        Me.GroupBox5.TabIndex = 52
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Smart Pen"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.Label11.Location = New System.Drawing.Point(17, 17)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(67, 20)
+        Me.Label11.TabIndex = 10
+        Me.Label11.Text = "Alive Sec"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.Label6.Location = New System.Drawing.Point(17, 49)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(63, 20)
+        Me.Label6.TabIndex = 5
+        Me.Label6.Text = "Pressure"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.Label12.Location = New System.Drawing.Point(228, 17)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(84, 20)
+        Me.Label12.TabIndex = 11
+        Me.Label12.Text = "Temperature"
+        '
+        'TrackBar1
+        '
+        Me.TrackBar1.AutoSize = False
+        Me.TrackBar1.Location = New System.Drawing.Point(333, 49)
+        Me.TrackBar1.Maximum = 700
+        Me.TrackBar1.Minimum = 25
+        Me.TrackBar1.Name = "TrackBar1"
+        Me.TrackBar1.Size = New System.Drawing.Size(100, 20)
+        Me.TrackBar1.TabIndex = 39
+        Me.TrackBar1.TickStyle = System.Windows.Forms.TickStyle.None
+        Me.TrackBar1.Value = 25
+        '
+        'lbAliveSec
+        '
+        Me.lbAliveSec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbAliveSec.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.lbAliveSec.Location = New System.Drawing.Point(122, 17)
+        Me.lbAliveSec.Name = "lbAliveSec"
+        Me.lbAliveSec.Size = New System.Drawing.Size(100, 20)
+        Me.lbAliveSec.TabIndex = 30
+        '
+        'lbTemperature
+        '
+        Me.lbTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbTemperature.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.lbTemperature.Location = New System.Drawing.Point(333, 17)
+        Me.lbTemperature.Name = "lbTemperature"
+        Me.lbTemperature.Size = New System.Drawing.Size(100, 20)
+        Me.lbTemperature.TabIndex = 36
+        '
+        'lbPressure
+        '
+        Me.lbPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbPressure.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.lbPressure.Location = New System.Drawing.Point(122, 49)
+        Me.lbPressure.Name = "lbPressure"
+        Me.lbPressure.Size = New System.Drawing.Size(100, 20)
+        Me.lbPressure.TabIndex = 25
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
+        Me.Label20.Location = New System.Drawing.Point(228, 49)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(68, 20)
+        Me.Label20.TabIndex = 19
+        Me.Label20.Text = "Threshold"
         '
         'GroupBox4
         '
@@ -388,16 +486,6 @@ Partial Class frmPenEx
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Status"
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.Label11.Location = New System.Drawing.Point(17, 17)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(67, 20)
-        Me.Label11.TabIndex = 10
-        Me.Label11.Text = "Alive Sec"
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -407,28 +495,6 @@ Partial Class frmPenEx
         Me.Label5.Size = New System.Drawing.Size(88, 20)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Packet Count"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.Label6.Location = New System.Drawing.Point(17, 49)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(63, 20)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Pressure"
-        '
-        'TrackBar1
-        '
-        Me.TrackBar1.AutoSize = False
-        Me.TrackBar1.Location = New System.Drawing.Point(333, 49)
-        Me.TrackBar1.Maximum = 700
-        Me.TrackBar1.Minimum = 25
-        Me.TrackBar1.Name = "TrackBar1"
-        Me.TrackBar1.Size = New System.Drawing.Size(100, 20)
-        Me.TrackBar1.TabIndex = 39
-        Me.TrackBar1.TickStyle = System.Windows.Forms.TickStyle.None
-        Me.TrackBar1.Value = 25
         '
         'Label7
         '
@@ -471,15 +537,6 @@ Partial Class frmPenEx
         Me.Label17.TabIndex = 16
         Me.Label17.Text = "Conv X"
         '
-        'lbTemperature
-        '
-        Me.lbTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbTemperature.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.lbTemperature.Location = New System.Drawing.Point(333, 17)
-        Me.lbTemperature.Name = "lbTemperature"
-        Me.lbTemperature.Size = New System.Drawing.Size(100, 20)
-        Me.lbTemperature.TabIndex = 36
-        '
         'lbPacketCount
         '
         Me.lbPacketCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -497,15 +554,6 @@ Partial Class frmPenEx
         Me.lbConvY.Name = "lbConvY"
         Me.lbConvY.Size = New System.Drawing.Size(100, 20)
         Me.lbConvY.TabIndex = 35
-        '
-        'lbPressure
-        '
-        Me.lbPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbPressure.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.lbPressure.Location = New System.Drawing.Point(122, 49)
-        Me.lbPressure.Name = "lbPressure"
-        Me.lbPressure.Size = New System.Drawing.Size(100, 20)
-        Me.lbPressure.TabIndex = 25
         '
         'lbRawY
         '
@@ -543,25 +591,6 @@ Partial Class frmPenEx
         Me.lbConvX.Size = New System.Drawing.Size(100, 20)
         Me.lbConvX.TabIndex = 29
         '
-        'lbAliveSec
-        '
-        Me.lbAliveSec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbAliveSec.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.lbAliveSec.Location = New System.Drawing.Point(122, 17)
-        Me.lbAliveSec.Name = "lbAliveSec"
-        Me.lbAliveSec.Size = New System.Drawing.Size(100, 20)
-        Me.lbAliveSec.TabIndex = 30
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.Label12.Location = New System.Drawing.Point(228, 17)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(84, 20)
-        Me.Label12.TabIndex = 11
-        Me.Label12.Text = "Temperature"
-        '
         'Label16
         '
         Me.Label16.AutoSize = True
@@ -571,16 +600,6 @@ Partial Class frmPenEx
         Me.Label16.Size = New System.Drawing.Size(47, 20)
         Me.Label16.TabIndex = 15
         Me.Label16.Text = "Raw Y"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Arial Narrow", 12.0!)
-        Me.Label20.Location = New System.Drawing.Point(228, 49)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(68, 20)
-        Me.Label20.TabIndex = 19
-        Me.Label20.Text = "Threshold"
         '
         'Label18
         '
@@ -674,6 +693,29 @@ Partial Class frmPenEx
         Me.GroupBox1.TabIndex = 48
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Smart Marker"
+        '
+        'btnAudio
+        '
+        Me.btnAudio.Location = New System.Drawing.Point(457, 77)
+        Me.btnAudio.Name = "btnAudio"
+        Me.btnAudio.Size = New System.Drawing.Size(89, 20)
+        Me.btnAudio.TabIndex = 53
+        Me.btnAudio.Text = "Set Audio"
+        Me.btnAudio.UseVisualStyleBackColor = True
+        '
+        'txtAudioVolume
+        '
+        Me.txtAudioVolume.Location = New System.Drawing.Point(337, 76)
+        Me.txtAudioVolume.Name = "txtAudioVolume"
+        Me.txtAudioVolume.Size = New System.Drawing.Size(100, 21)
+        Me.txtAudioVolume.TabIndex = 52
+        '
+        'txtAudioMode
+        '
+        Me.txtAudioMode.Location = New System.Drawing.Point(337, 49)
+        Me.txtAudioMode.Name = "txtAudioMode"
+        Me.txtAudioMode.Size = New System.Drawing.Size(100, 21)
+        Me.txtAudioMode.TabIndex = 51
         '
         'Label31
         '
@@ -771,51 +813,20 @@ Partial Class frmPenEx
         Me.lbMakerState.Size = New System.Drawing.Size(100, 20)
         Me.lbMakerState.TabIndex = 42
         '
-        'txtAudioMode
+        'Button1
         '
-        Me.txtAudioMode.Location = New System.Drawing.Point(337, 49)
-        Me.txtAudioMode.Name = "txtAudioMode"
-        Me.txtAudioMode.Size = New System.Drawing.Size(100, 21)
-        Me.txtAudioMode.TabIndex = 51
-        '
-        'txtAudioVolume
-        '
-        Me.txtAudioVolume.Location = New System.Drawing.Point(337, 76)
-        Me.txtAudioVolume.Name = "txtAudioVolume"
-        Me.txtAudioVolume.Size = New System.Drawing.Size(100, 21)
-        Me.txtAudioVolume.TabIndex = 52
-        '
-        'btnAudio
-        '
-        Me.btnAudio.Location = New System.Drawing.Point(457, 77)
-        Me.btnAudio.Name = "btnAudio"
-        Me.btnAudio.Size = New System.Drawing.Size(89, 20)
-        Me.btnAudio.TabIndex = 53
-        Me.btnAudio.Text = "Set Audio"
-        Me.btnAudio.UseVisualStyleBackColor = True
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Label11)
-        Me.GroupBox5.Controls.Add(Me.Label6)
-        Me.GroupBox5.Controls.Add(Me.Label12)
-        Me.GroupBox5.Controls.Add(Me.TrackBar1)
-        Me.GroupBox5.Controls.Add(Me.lbAliveSec)
-        Me.GroupBox5.Controls.Add(Me.lbTemperature)
-        Me.GroupBox5.Controls.Add(Me.lbPressure)
-        Me.GroupBox5.Controls.Add(Me.Label20)
-        Me.GroupBox5.Location = New System.Drawing.Point(14, 285)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(661, 90)
-        Me.GroupBox5.TabIndex = 52
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Smart Pen"
+        Me.Button1.Location = New System.Drawing.Point(176, 0)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(98, 40)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Calibration by Form"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmPenEx
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(711, 804)
+        Me.ClientSize = New System.Drawing.Size(747, 804)
         Me.Controls.Add(Me.SplitContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -829,17 +840,17 @@ Partial Class frmPenEx
         Me.SplitContainer2.Panel2.ResumeLayout(False)
         Me.SplitContainer2.ResumeLayout(False)
         CType(Me.picMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -909,5 +920,6 @@ Partial Class frmPenEx
     Friend WithEvents txtAudioVolume As System.Windows.Forms.TextBox
     Friend WithEvents txtAudioMode As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class

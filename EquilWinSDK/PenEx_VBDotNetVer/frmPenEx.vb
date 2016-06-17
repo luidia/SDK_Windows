@@ -359,7 +359,16 @@ Public Class frmPenEx
             MessageBox.Show("Either device is off or not in good connection. Check device and try again. Or pair it again.")
         End If
     End Sub
+    Public Function GetRegularRectFromPoint(ByVal ptStart As Point, ByVal ptEnd As Point) As Rectangle
+        Dim rt2 As New Rectangle
+        rt2.X = Math.Min(ptStart.X, ptEnd.X)
+        rt2.Y = Math.Min(ptStart.Y, ptEnd.Y)
 
+        rt2.Width = Math.Abs(ptEnd.X - ptStart.X)
+        rt2.Height = Math.Abs(ptEnd.Y - ptStart.Y)
+        Return rt2
+
+    End Function
     Private Sub connectPenTextChange(ByVal sTitle As String)
         btnConnectPen.Text = sTitle
     End Sub
@@ -632,7 +641,7 @@ Public Class frmPenEx
             Case WM_PENCONDITION
                 Console.WriteLine("WM_PENCONDITION")
                 Dim pCondition As New PENConditionData
-                pCondition = Marshal.PtrToStructure(m.WParam, New PENConditionData().GetType) 'IntPtr을 구조체형으로 변환
+                pCondition = Marshal.PtrToStructure(m.WParam, New PENConditionData().GetType) 'PEN DATA STRUCTURE
                 lbModelCode.Text = pCondition.modelCode
                 lbBatteryStation.Text = pCondition.battery_station
                 lbBatteryPen.Text = pCondition.battery_pen
@@ -714,6 +723,64 @@ Public Class frmPenEx
 
     Private Sub btnAudio_Click(sender As System.Object, e As System.EventArgs) Handles btnAudio.Click
         SetAudio(CByte(CInt(txtAudioMode.Text)), CByte(CInt(txtAudioVolume.Text)))
+
+    End Sub
+
+    Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+
+
+        Dim frmCali As New frmCalibration2
+
+
+        SetCalibMode(True)
+        SetReciveHandle(frmCali.Handle)
+        If frmCali.ShowDialog() = DialogResult.OK Then
+            Dim ff2 As New frmDrawing2
+            Dim tMarginX As Integer = ff2.Width - ff2.ClientSize.Width
+            Dim tMarginY As Integer = ff2.Height - ff2.ClientSize.Height
+
+            ff2.Width = frmCali.m_RectSource.Width + tMarginX
+            ff2.Height = frmCali.m_RectSource.Height + tMarginY
+            ff2.SetConfig(m_DrawPen, m_PenStyle)
+
+            SetDrawHandle(ff2.picMain.Handle)
+            SetReciveHandle(ff2.Handle)
+
+
+            SetCalibMode(False)
+
+            Dim rect As Rectangle = frmCali.GetTargetRect
+            Dim rectOrg As Rectangle = frmCali.picMain.ClientRectangle
+            Dim rectCal As Rectangle = GetRegularRectFromPoint(Point.Round(frmCali.m_CaliTop), Point.Round(frmCali.m_CaliBottom))
+            Dim tx, ty, bx, by As Integer
+            Const ABSOLUTE_XY_SIZE As Integer = 65535
+            tx = ABSOLUTE_XY_SIZE * (rect.X / rectOrg.Width)
+            ty = ABSOLUTE_XY_SIZE * (rect.Y / rectOrg.Height)
+
+            bx = ABSOLUTE_XY_SIZE * (rect.Right / rectOrg.Width)
+            by = ABSOLUTE_XY_SIZE * (rect.Bottom / rectOrg.Height)
+            Console.WriteLine("rectOrg={0} rect={1} tx={2}, ty={3}, bx={4}, by={5}", rectOrg, rect, tx, ty, bx, by)
+            'WORKAREA_RECT_MANUAL_LAST = CUtil.GetRegularRectFromPoint(Point.Round(frmCali.m_CaliTop), Point.Round(frmCali.m_CaliBottom))
+
+            'frmGr.SetCaliWorkSheet(frmCali.m_CaliTop.X, frmCali.m_CaliTop.Y, frmCali.m_CaliBottom.X, frmCali.m_CaliBottom.Y)
+
+            SetCalibration_Top(rectCal.Left, rectCal.Top)
+            SetCalibration_Bottom(rectCal.Right, rectCal.Bottom)
+            SetCalibration_EndWithDest(tx, ty, bx, by)
+
+            ff2.ShowDialog()
+            SetCalibMode(False)
+            SetReciveHandle(Me.Handle)
+            SetDrawHandle(picMain.Handle)
+
+
+        Else
+            SetCalibMode(False)
+            SetReciveHandle(Me.Handle)
+            SetDrawHandle(picMain.Handle)
+        End If
+
+
 
     End Sub
 End Class

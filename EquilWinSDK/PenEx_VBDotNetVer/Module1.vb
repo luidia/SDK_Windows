@@ -84,7 +84,7 @@ Module Module1
     Public Const WM_DI_DUPLICATE As Integer = &H400 + 17        'Duplicate Button event
     Public Const WM_MCU_VERSION As Integer = &H400 + 18        'Duplicate Button event
     Public Const WM_TIMERRESET As Integer = &H400 + 19        'Duplicate Button event
-
+    Public Const WM_LOST_PEN As Integer = &H400 + 20        'Disconnect by timer cannot receive pendata during 30sec
 
 
     '' Structure for receiving pen data 
@@ -107,6 +107,8 @@ Module Module1
         Public PenTiming As Integer 'Maker State Data
         Public bRight As Integer
         Public Station_Position As Integer
+        Public drawRectX As Integer
+        Public drawRectY As Integer
     End Structure
     Public Structure PENConditionData
         Public modelCode As Integer
@@ -129,6 +131,8 @@ Module Module1
     Public Declare Sub SetCalibration_Top Lib "PNFPenLib.dll" (ByVal x As Double, ByVal y As Double)
     Public Declare Sub SetCalibration_Bottom Lib "PNFPenLib.dll" (ByVal x As Double, ByVal y As Double)
     Public Declare Sub SetCalibration_End Lib "PNFPenLib.dll" ()
+    'for calibration by form
+    Public Declare Sub SetCalibration_EndWithDest Lib "PNFPenLib.dll" (tx As Integer, ty As Integer, bx As Integer, by As Integer)
 
     Public Declare Sub SetAudio Lib "PNFPenLib.dll" (ByVal _AudioMode As Byte, ByVal _AudioVolume As Byte)
     Public Declare Function GetAudioMode Lib "PNFPenLib.dll" () As Byte
