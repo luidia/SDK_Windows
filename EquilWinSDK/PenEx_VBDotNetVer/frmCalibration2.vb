@@ -55,7 +55,7 @@ Public Class frmCalibration2
             If bGuide Then
             Else
                 Dim tPoint As Point
-                Dim s As String = "Please Drag the point where you want and click matched point on paper with Smart Pen."
+                Dim s As String = "Please Drag the point where you want " + vbCrLf + "and click the matched point on paper with Smart Pen."
                 Dim ft As New Font("Arial", 10)
 
                 gr.TextRenderingHint = TextRenderingHint.AntiAlias
