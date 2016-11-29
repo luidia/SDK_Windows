@@ -151,6 +151,9 @@ Public Class frmPenEx
 
 #Region "Controls click event"
     Private Sub btnConnectPen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnConnectPen.Click
+
+
+
         If bPenConnect Then
             DisConnectPen()
             connectPenTextChange("Connect")
@@ -291,10 +294,15 @@ Public Class frmPenEx
 #End Region
 
 #Region "Connect / disconnect pen"
+    Public Sub EquilReceiveHandle()
+        'If you set this, USB connection message will be sent to the window handle.
+        'without find connect pen
+        SetReciveHandle(m_ReciveHanle)
+    End Sub
     Public Sub ConnectPen()
 
-        SetReciveHandle(m_ReciveHanle)
-
+        '        SetReciveHandle(m_ReciveHanle)
+        Me.Invoke(New MethodInvoker(AddressOf Me.EquilReceiveHandle))
         SetDrawRect(picMain.Width, picMain.Height)
 
         If FindDevice() Then    'find usb connetion (only for over F/W version 6)
@@ -326,8 +334,10 @@ Public Class frmPenEx
     End Sub
 
     Public Sub DisConnectPen()
-        Me.BeginInvoke(New MethodInvoker(AddressOf OnDisconnect))
-
+        Try
+            OnDisconnect(0)
+        Catch ex As Exception
+        End Try
         Dim del As ConnectDelegate = New ConnectDelegate(AddressOf DelegateUISet)
         Me.BeginInvoke(del)
 
@@ -338,6 +348,7 @@ Public Class frmPenEx
 #End Region
 
 #Region "General function"
+
     Public Sub MouseFlagDisable()
         If m_bDrag Then
             picMainDoMouseUp(m_ptMouseMove, MouseButtons.Left, 255, False)
@@ -528,8 +539,6 @@ Public Class frmPenEx
             Case WM_DI_CHANGE_STATION
                 MsgBox("Sensor position changed")
 
-            Case WM_DISCONNECTPEN
-                MsgBox("Bluetooth Disconnected")
             Case WM_DISCONNECTUSB
                 MsgBox("USB Disconnected")
             Case WM_DI_NEWPAGE
@@ -675,8 +684,14 @@ Public Class frmPenEx
                 ElseIf m.LParam = 3 Then 'after connecting firt data receiving
                     bPenConnectExit = True
                     EquilModelCode = pCondition.modelCode                    'save equil model number
+                    bPenConnect = True
+
                     InputLog("RECV FIRST DATA")
-                Else
+                ElseIf m.LParam = 0 Then
+                    If Not bPenConnect Then 'USB auto recognition.
+                        bPenConnect = True
+                        EquilModelCode = pCondition.modelCode                    'save equil model number
+                    End If
 
                 End If
 

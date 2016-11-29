@@ -119,7 +119,7 @@ Module Module1
         Public usbConnect As Integer
     End Structure
     '    Public Declare Function FindPort Lib "PNFPenLib.dll" () As Boolean 'scan port from device
-    Public Declare Sub OnDisconnect Lib "PNFPenLib.dll" () ' 
+    Public Declare Sub OnDisconnect Lib "BTlib.dll" (Terminate As Integer)
     Public Declare Function FindDevice Lib "PNFPenLib.dll" () As Boolean   'Search for USB connection
     Public Declare Sub PortSearch Lib "PNFPenLib.dll" ()
     Public Declare Sub SetReciveHandle Lib "PNFPenLib.dll" (ByVal hWnd As System.IntPtr)

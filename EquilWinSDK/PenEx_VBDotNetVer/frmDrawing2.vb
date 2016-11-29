@@ -182,6 +182,8 @@ Public Class frmDrawing2
 
             Case WM_DISCONNECTPEN
 
+            Case WM_DI_NEWPAGE
+                Console.WriteLine("WM_DI_NEWPAGE New Page Button Clicked")
             Case Else
                 MyBase.WndProc(m)
         End Select
