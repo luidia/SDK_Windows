@@ -367,7 +367,7 @@ Public Class frmPenEx
         Else
             InputLog("NOT_CONNECTED")
             btnConnectPen.Text = "Connect"
-            MessageBox.Show("Either device is off or not in good connection. Check device and try again. Or pair it again.")
+            'MessageBox.Show("Either device is off or not in good connection. Check device and try again. Or pair it again.")
         End If
     End Sub
     Public Function GetRegularRectFromPoint(ByVal ptStart As Point, ByVal ptEnd As Point) As Rectangle
