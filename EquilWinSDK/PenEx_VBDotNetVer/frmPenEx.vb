@@ -668,7 +668,7 @@ Public Class frmPenEx
 
                 End Select
 
-
+                CURRENT_MARKER_DIRECT = pCondition.StationPosition
 
                 PacketCnt += 1 '
                 lbPacketCount.Text = PacketCnt.ToString

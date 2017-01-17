@@ -4,6 +4,7 @@ Imports System.Drawing.Text
 Public Class frmCalibration2
     Public m_bkImg As Image
 
+    Public bDisconnect As Boolean = False
     Dim m_bDrag As Boolean = False
     Dim m_ptOld As Point
     Enum StatusNum
@@ -55,11 +56,12 @@ Public Class frmCalibration2
             If bGuide Then
             Else
                 Dim tPoint As Point
-                Dim s As String = "Please Drag the point where you want " + vbCrLf + "and click the matched point on paper with Smart Pen."
+                'Dim s As String = "원하는 위치로 포인트를 드래그하고," + vbCrLf + " 종이위에 일치하는 점을 펜으로 찍어 주세요."
+                Dim s As String = "drag the point where you want to put, dot where it shows on the paper"
                 Dim ft As New Font("Arial", 10)
 
                 gr.TextRenderingHint = TextRenderingHint.AntiAlias
-
+                '텍스트의 경우는 그릴때 영역이 정해진다.
                 Dim wF As SizeF = gr.MeasureString(s, ft)
                 If wF.Width + pt.X + r + 2 > gr.VisibleClipBounds.Width Then
                     tPoint.X = pt.X - r - wF.Width - 2
@@ -87,26 +89,9 @@ Public Class frmCalibration2
     Public Function GetTargetRect() As Rectangle
         Return New Rectangle(imgNum1.pt.X, imgNum1.pt.Y, imgNum2.pt.X - imgNum1.pt.X, imgNum2.pt.Y - imgNum1.pt.Y)
     End Function
-    Public Function GetWorkingMonitorRect(ByVal hWnd As IntPtr) As Rectangle
-        If hWnd <> Nothing Then
-            Return Screen.FromHandle(hWnd).WorkingArea
-        End If
-
-        For Each process As System.Diagnostics.Process In System.Diagnostics.Process.GetProcesses()
-            If (process.ProcessName.Equals("Equilnote")) Then
-                Dim _sc As System.Windows.Forms.Screen = System.Windows.Forms.Screen.FromHandle(process.MainWindowHandle)
-                Return _sc.WorkingArea
-            End If
-        Next
-        Return Screen.PrimaryScreen.WorkingArea
-    End Function
     Private Sub frmCalibration2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Dim rectD As RectangleF = GetWorkingMonitorRect(Me.Handle)
-        m_bkImg = Image.FromFile(Application.StartupPath + "/sample.png")
-        m_RectSource.Height = rectD.Height - 20
-        m_RectSource.Width = m_RectSource.Height * m_bkImg.Width / m_bkImg.Height
-
 
 
 #If 0 Then
@@ -136,7 +121,7 @@ Public Class frmCalibration2
 
         imgNum2.pt = New Point(picMain.Width - initMargin, picMain.Height - initMargin)
 
-        Me.Text = "Calibration by Form"
+        Me.Text = "This is the feature for when you use the Smartpen on the printed image from App. This calibration will help you to match precisely with what you write on printed image and what you see on the app. "
         Console.WriteLine("m_RectSource={0} picmain={1} me.w={2} me.h={3} clientrect={4}", m_RectSource, picMain.ClientRectangle, Me.Width, Me.Height, Me.ClientRectangle)
     End Sub
 
@@ -195,7 +180,7 @@ Public Class frmCalibration2
         Select Case m.Msg
             Case WM_RETURNMESSAGE
 
-                Dim m_pRec As _pen_rec = Marshal.PtrToStructure(m.WParam, New _pen_rec().GetType)
+                Dim m_pRec As _pen_rec = Marshal.PtrToStructure(m.WParam, New _pen_rec().GetType) 'IntPtr을 구조체형으로 변환
 
                 If m_pRec.PenStatus = PenStatus.PEN_UP Then
                     Select Case m_nStatus
@@ -236,10 +221,12 @@ Public Class frmCalibration2
 
             Case WM_DISCONNECTPEN
                 Console.WriteLine("WM_DISCONNECTPEN")
+                bDisconnect = True
                 Me.DialogResult = DialogResult.Cancel
                 Me.Close()
             Case WM_LOST_PEN
                 Console.WriteLine("WM_LOST_PEN")
+                bDisconnect = True
                 Me.DialogResult = DialogResult.Cancel
                 Me.Close()
             Case WM_GESTUREMESSAGE

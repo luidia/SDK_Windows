@@ -139,4 +139,6 @@ Module Module1
     Public Declare Function GetAudioVolume Lib "PNFPenLib.dll" () As Byte
 
     Public EquilModelCode As Integer = 2
+    Public CURRENT_MARKER_DIRECT As Integer
+
 End Module

@@ -125,6 +125,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Module1.vb" />
+    <Compile Include="Mod_Functions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -210,6 +211,48 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\cali_bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\cali_num1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\cali_num2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_bottom_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_bottom_btn_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_btn_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_cali01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_cali02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_cali03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_top_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sm_top_btn_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\sp_cali.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Cari\eq_pointer_guide.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
