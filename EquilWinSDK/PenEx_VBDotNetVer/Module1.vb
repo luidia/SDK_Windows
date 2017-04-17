@@ -86,6 +86,33 @@ Module Module1
     Public Const WM_TIMERRESET As Integer = &H400 + 19        'Duplicate Button event
     Public Const WM_LOST_PEN As Integer = &H400 + 20        'Disconnect by timer cannot receive pendata during 30sec
 
+    Public Enum DICOMMAND
+        SHOWLIST = 1
+        OPENFILE
+        OPENFOLDER
+        REMOVEFILE
+        REMOVEFOLDER
+        REMOVEALL
+        SETDATETIME
+        SHOWDATETIME
+        SHOWDISKFREESPACE
+        SHOWDEVICEID
+        SHOWTEMPFILE
+        CHANGEMODETOREAL
+        CHANGEMODETOT2
+    End Enum
+    Public Enum WorkAreaType
+        LETTER = 1
+        A4
+        A5
+        B5
+        B6
+    End Enum
+    Public Cali_LETTER As New System.Drawing.Rectangle(1737, 541, (5445 - 1737), (4818 - 541))   '(1700, 500, 5470, 4800)
+    Public Cali_A4 As New System.Drawing.Rectangle(1768, 563, (5392 - 1768), (5160 - 563))       '(1750, 450, 5450, 5120)
+    Public Cali_A5 As New System.Drawing.Rectangle(2341, 542, (4865 - 2341), (3631 - 542))       '(2300, 540, 4880, 3625)
+    Public Cali_B5 As New System.Drawing.Rectangle(2027, 561, (5183 - 2027), (4462 - 561))       '(2000, 500, 5200, 4430)
+    Public Cali_B6 As New System.Drawing.Rectangle(2500, 544, (4704 - 2500), (3154 - 544))       '(2460, 530, 4660, 3170)
 
     '' Structure for receiving pen data 
     Friend Structure _pen_rec
@@ -138,7 +165,24 @@ Module Module1
     Public Declare Function GetAudioMode Lib "PNFPenLib.dll" () As Byte
     Public Declare Function GetAudioVolume Lib "PNFPenLib.dll" () As Byte
 
+
+    ''' <summary>
+    ''' Memory Import Apis '''''
+    ''' </summary>
+    ''' <remarks></remarks>
+    ''' 
+
+    Public Declare Function StartDISetup Lib "PNFPenLib.dll" (ByVal nState As Integer) As Integer '' Intialize nState =0:BT, nSate=1 USB
+    Public Declare Sub SetDI Lib "PNFPenLib.dll" (ByVal nState As Integer, ByVal nFolder As Integer, ByVal nFile As Integer)
+    Public Declare Sub SetDIByte Lib "PNFPenLib.dll" (ByVal commandBytes As Byte())
+    Public Declare Function GetDIList Lib "PNFPenLib.dll" (ByVal byteArray As IntPtr, ByRef _size As Integer) As Integer 'get file list
+    Public Declare Function DIOpenFileStop Lib "PNFPenLib.dll" () As Integer
+
+
     Public EquilModelCode As Integer = 2
     Public CURRENT_MARKER_DIRECT As Integer
+
+
+
 
 End Module

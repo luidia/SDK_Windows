@@ -117,6 +117,12 @@
     <Compile Include="frmDrawing2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmMemoryImport.Designer.vb">
+      <DependentUpon>frmMemoryImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMemoryImport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPenEx.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDrawing2.resx">
       <DependentUpon>frmDrawing2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMemoryImport.resx">
+      <DependentUpon>frmMemoryImport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPenEx.resx">
       <DependentUpon>frmPenEx.vb</DependentUpon>

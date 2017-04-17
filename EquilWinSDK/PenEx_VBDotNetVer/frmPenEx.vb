@@ -37,6 +37,10 @@ Public Class frmPenEx
     Dim m_Stroke As CPNFStroke
     Dim imgattr As ImageAttributes   'highlighter attribute
     Const Htransparency As Double = 0.3 ' transparency of highlighter 
+
+
+    Dim m_frmMemory As frmMemoryImport
+
 #End Region
 
 #Region "Delegate"
@@ -532,6 +536,15 @@ Public Class frmPenEx
         End If
     End Function
 #End Region
+    Public Event ShowDIList()
+    Public Sub SetDIList() Handles Me.ShowDIList
+        If m_frmMemory IsNot Nothing Then
+        Else
+            btnMemoryImport_Click(Nothing, Nothing)
+        End If
+        m_frmMemory.SetDIList()
+
+    End Sub
 
 #Region "Win Message"
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -728,13 +741,68 @@ Public Class frmPenEx
                     btnConnectPen.BeginInvoke(cpd, "Connect")
                 End If
 
+                ''''''' For Memory Import
+            Case WM_SHOWLIST
+                Console.WriteLine(String.Format("Memory Import WM_SHOWLIST - {0}", m.LParam))
+                RaiseEvent ShowDIList()
+
+            Case WM_DI_START
+                ' When data in memory exists, 
+                Console.WriteLine("Memory Import WM_DI_START =======================")
+            Case WM_DI_OK
+
+                Console.WriteLine("Memory Import WM_DI_OK =======================")
+
+            Case WM_DI_FAIL
+
+                Console.WriteLine("Memory Import WM_DI_FAIL =======================")
+
+            Case WM_DI_REMOVEOK
+
+                Console.WriteLine(String.Format("Memory ImportWM_DI_REMOVEOK - folder : {0}, file : {1}", m.WParam, m.LParam))
+
+            Case WM_DI_ACC
+
+                Console.WriteLine("Memory Import WM_DI_ACC =======================")
+                ' for smart pen 2
+                ' Sensor is lifted for changing paper. you should create new page.
+            Case WM_DI_CHANGE_STATION
+                Console.WriteLine("Memory Import WM_DI_CHANGE_STATION =======================")
+                ' for smart marker
+                ' station is changed
+
+                'PenStateTimerStop()
+            Case WM_DI_PAGE_NUM
+                Dim nDIPaperSize As Integer = m.LParam 'Paper Size
+                Console.WriteLine("WM_DI_PAGE_NUM ==>{0}", nDIPaperSize)
+                Dim rect As Rectangle = GetWorkAreaRect(nDIPaperSize)
+                SetCalibration_Top(rect.Left, rect.Top)
+                SetCalibration_Bottom(rect.Right, rect.Bottom)
+                SetCalibration_End()
+
+
+                'nMakePage = 1
             Case Else
                 MyBase.WndProc(m)
         End Select
     End Sub
 #End Region
 
+    Public Function GetWorkAreaRect(ByVal nWorkAreaType As Integer) As System.Drawing.Rectangle
 
+        Select Case nWorkAreaType
+            Case WorkAreaType.LETTER
+                Return Cali_LETTER
+            Case WorkAreaType.A4
+                Return Cali_A4
+            Case WorkAreaType.A5
+                Return Cali_A5
+            Case WorkAreaType.B5
+                Return Cali_B5
+            Case WorkAreaType.B6
+                Return Cali_B6
+        End Select
+    End Function
 
     Private Sub btnAudio_Click(sender As System.Object, e As System.EventArgs) Handles btnAudio.Click
         SetAudio(CByte(CInt(txtAudioMode.Text)), CByte(CInt(txtAudioVolume.Text)))
@@ -797,5 +865,16 @@ Public Class frmPenEx
 
 
 
+    End Sub
+
+    Private Sub btnMemoryImport_Click(sender As Object, e As EventArgs) Handles btnMemoryImport.Click
+        If bPenConnect Then
+            m_frmMemory = Nothing
+            m_frmMemory = New frmMemoryImport
+            m_frmMemory.Show()
+
+        Else
+            MessageBox.Show("Either device is off or not in good connection. Check device and try again. Or pair it again.")
+        End If
     End Sub
 End Class
